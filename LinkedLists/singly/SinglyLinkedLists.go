@@ -1,4 +1,4 @@
-package dsa
+package singly
 
 import "errors"
 
@@ -61,7 +61,7 @@ func (ll *SinglyLinkedList[T]) DelAtBeg() error {
 		ll.length--
 		return nil
 	}
-	err := errors.New("linked list is empty, can't delete anymore!")
+	err := errors.New("linked list is empty, can't delete anymore")
 	return err
 }
 
@@ -84,6 +84,6 @@ func (ll *SinglyLinkedList[T]) DelAtEnd() error {
 		ll.length--
 		return nil
 	}
-	err := errors.New("linked list is empty, can't delete anymore!")
+	err := errors.New("linked list is empty, can't delete anymore")
 	return err
 }
