@@ -3,17 +3,21 @@ package main
 import "errors"
 
 type DynamicArray struct {
-	elements 	[]any
-	length		int
-	capacity 	int
+	Elements 	[]any
+	Length		int
+	Capacity 	int
 }
 
+const (
+	defaultValueCapacity = 10
+)
+
 func (da DynamicArray) isEmpty() bool {
-	return da.length == 0
+	return da.Length == 0
 }
 
 func (da DynamicArray) checkRange(index int) error {
-	if index >= da.length || index < 0 {
+	if index >= da.Length || index < 0 {
 		return errors.New("index out of range")
 	} else {
 		return nil
@@ -25,30 +29,30 @@ func (da *DynamicArray) set(index int, value any) error {
 	if err != nil {
 		return err
 	} else {
-		da.elements[index] = value
+		da.Elements[index] = value
 		return nil
 	}
 }
 
 func (da *DynamicArray) resizeArray() {
-	if da.capacity == 0 {
-		da.capacity = da.length
+	if da.Capacity == 0 {
+		da.Capacity = defaultValueCapacity
 	} else {
-		da.capacity = da.capacity << 1
+		da.Capacity = da.Capacity << 1
 	}
 
-	newDataElement := make([]any, da.capacity)
-	copy(newDataElement, da.elements)
-	da.elements = newDataElement
+	newDataElement := make([]any, da.Capacity)
+	copy(newDataElement, da.Elements)
+	da.Elements = newDataElement
 }
 
 func (da *DynamicArray) append(element any) {
-	if da.length == da.capacity {
+	if da.Length == da.Capacity {
 		da.resizeArray()
 	}
 
-	da.elements[da.length] = element
-	da.length++
+	da.Elements[da.Length] = element
+	da.Length++
 }
 
 func (da *DynamicArray) removeAt(index int) error {
@@ -57,9 +61,9 @@ func (da *DynamicArray) removeAt(index int) error {
 		return err
 	}
 
-	copy(da.elements[index:], da.elements[index+1:])
-	da.elements[da.length-1] = nil
-	da.length--
+	copy(da.Elements[index:], da.Elements[index+1:])
+	da.Elements[da.Length-1] = nil
+	da.Length--
 	return nil
 }
 
@@ -68,16 +72,16 @@ func (da DynamicArray) get(index int) (any, error) {
 	if err != nil {
 		return nil, err
 	} else {
-		return da.elements[index], nil
+		return da.Elements[index], nil
 	}
 }
 
 func (da DynamicArray) getData() []any {
-	return da.elements[:da.length]
+	return da.Elements[:da.Length]
 }
 
 func (da DynamicArray) indexOf(value any) (int, error) {
-	for i, v := range(da.elements) {
+	for i, v := range(da.Elements) {
 		if v == value {
 			return i, nil
 		}
