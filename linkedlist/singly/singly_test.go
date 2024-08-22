@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"reflect"
 	"testing"
-
 )
 
 
@@ -121,7 +120,6 @@ func TestMain(t *testing.T) {
 		fmt.Println(list2.Tail.Data)
 		fmt.Println(list2.Head.Data)
 	})
-
 	list3 := NewSinglyLinkedList[int]()
 	list3.AddAtBeg(1)
 	list3.AddAtBeg(2)

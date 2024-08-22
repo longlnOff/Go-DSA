@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-	type SinglyLinkedList[T any] struct {
+type SinglyLinkedList[T any] struct {
 	length int
 	Head *Node[T]
 	Tail *Node[T]
