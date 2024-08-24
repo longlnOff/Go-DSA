@@ -167,7 +167,6 @@ func (ll *DoublyLinkedList[T]) ReversePartition(left int, right int) error {
 		prev.Next.Previous = next
 		next.Previous = prev
 		prev.Next = next
-		
 	}
 
 	return nil

@@ -95,11 +95,14 @@ func (ll *SinglyLinkedList[T]) DelAtEnd() (T, error) {
 	return temp_val, err
 }
 
-func (ll *SinglyLinkedList[T]) CheckRangeFromIndex(index int) error {
-	if index >= ll.length || index < 0 {
-		return errors.New("index out of range")
+func (ll *SinglyLinkedList[T]) CheckRangeFromIndex(left int, right int) error {
+	if left < 0 || right > ll.length {
+		return fmt.Errorf(" invalid index: left: %v, right: %v", left, right)
+	} else if left >= right {
+		return fmt.Errorf("left value (%v) must less than right value (%v)", left, right)
+	} else {
+		return nil
 	}
-	return nil
 }
 
 func (ll *SinglyLinkedList[T]) Display() {
@@ -112,8 +115,8 @@ func (ll *SinglyLinkedList[T]) Display() {
 
 func (ll *SinglyLinkedList[T]) DelByPos(pos int) (T, error) {
 	var tempt T
-	if err := ll.CheckRangeFromIndex(pos); err != nil {
-		return tempt, err
+	if pos < 0 || pos >= ll.length {
+		return tempt, errors.New("invalid position")
 	}
 	if pos == 0 {
 		return ll.DelAtBeg()
@@ -163,7 +166,7 @@ func (ll *SinglyLinkedList[T]) Reverse() error {
 }
 
 func (ll *SinglyLinkedList[T]) ReversePartition(left, right int) error {
-		err := ll.CheckRangeFromIndex(left)
+		err := ll.CheckRangeFromIndex(left, right)
 		if err != nil {
 			return err
 		}
