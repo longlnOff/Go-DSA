@@ -81,7 +81,68 @@ func TestQueueArray(t *testing.T) {
 	})
 
 
+	t.Run("Test EnQueue", func(t *testing.T) {
+		var newQueue Queue[int]
+		newQueue.EnQueue(2)
+		newQueue.EnQueue(3)
+		newQueue.EnQueue(4)
+		newQueue.EnQueue(45)
+		f, _ := newQueue.FrontQueue()
+		b, _ := newQueue.BackQueue()
+		if  f != 2 && b != 45 {
+			t.Errorf("Test EnQueue is wrong the result must be %v and %v but got %v and %v", 2, 45, f, b)
+		}
 
+	})
+
+	t.Run("Test DeQueue", func(t *testing.T) {
+		var newQueue Queue[int]
+		newQueue.EnQueue(2)
+		newQueue.EnQueue(3)
+		newQueue.EnQueue(4)
+
+		newQueue.DeQueue()
+		a, _ := newQueue.DeQueue()
+		if a != 3 {
+			t.Errorf("Test DeQueue is wrong the result must be %v but got %v", 3, a)
+		}
+
+		//fmt.Println(newQueue.show())
+	})
+
+	t.Run("Test Queue isEmpty", func(t *testing.T) {
+		var newQueue Queue[int]
+		if newQueue.IsEmptyQueue() != true {
+			t.Errorf("Test Queue isEmpty is wrong the result must be %v but got %v", true, newQueue.IsEmptyQueue())
+		}
+
+		newQueue.EnQueue(3)
+		newQueue.EnQueue(4)
+
+		if newQueue.IsEmptyQueue() != false {
+			t.Errorf("Test Queue isEmpty is wrong the result must be %v but got %v", false, newQueue.IsEmptyQueue())
+		}
+	})
+
+	t.Run("Test Queue Length", func(t *testing.T) {
+		var newQueue Queue[int]
+		if newQueue.LenQueue() != 0 {
+			t.Errorf("Test Queue Length is wrong the result must be %v but got %v", 0, newQueue.LenQueue())
+		}
+
+		newQueue.EnQueue(3)
+		newQueue.EnQueue(4)
+		newQueue.DeQueue()
+		newQueue.EnQueue(22)
+		newQueue.EnQueue(99)
+		newQueue.DeQueue()
+		newQueue.DeQueue()
+
+		if newQueue.LenQueue() != 1 {
+			t.Errorf("Test Queue Length is wrong the result must be %v but got %v", 1, newQueue.LenQueue())
+		}
+
+	})
 
 
 
