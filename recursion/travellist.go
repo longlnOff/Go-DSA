@@ -6,7 +6,7 @@ import (
 
 // implement travel through list using recursion function
 // in this example we calculate sum of all odd number
-func sumOdds(index int, list []int) int {
+func sumOddsPrivate(index int, list []int) int {
 	if index == len(list) {
 		return 0
 	}
@@ -16,7 +16,11 @@ func sumOdds(index int, list []int) int {
 		value = list[index]
 	}
 
-	return sumOdds(index+1, list) + value
+	return sumOddsPrivate(index+1, list) + value
+}
+
+func sumOdds(list []int) int {
+	return sumOddsPrivate(0, list)
 }
 
 func productOfEvenNumbers(list []int) int {
